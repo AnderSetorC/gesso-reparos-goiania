@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C \"d:\\\\wok\\\\projetos\\\\gesso-reparo\" init)",
+      "PowerShell(gh repo create gesso-reparos-goiania --public --source=\"d:\\\\wok\\\\projetos\\\\gesso-reparo\" --remote=origin)"
+    ]
+  }
+}
