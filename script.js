@@ -134,90 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     serviceCards.forEach(card => observer.observe(card));
 
-    // Gallery carousel
+    // Gallery carousel - auto scroll infinite
     const galleryTrack = document.querySelector('.gallery-track');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const prevBtn = document.querySelector('.gallery-btn.prev');
-    const nextBtn = document.querySelector('.gallery-btn.next');
-    const dotsContainer = document.querySelector('.gallery-dots');
-
-    let galleryIndex = 0;
-    let itemsPerView = 3;
-    let autoGalleryInterval;
-
-    function updateItemsPerView() {
-        if (window.innerWidth <= 480) itemsPerView = 1;
-        else if (window.innerWidth <= 768) itemsPerView = 2;
-        else itemsPerView = 3;
+    if (galleryTrack) {
+        const items = galleryTrack.innerHTML;
+        galleryTrack.innerHTML = items + items;
     }
 
-    function getTotalPages() {
-        return Math.ceil(galleryItems.length / itemsPerView);
+    // Before/After carousel - auto scroll infinite
+    const baTrack = document.querySelector('.ba-track');
+    if (baTrack) {
+        const items = baTrack.innerHTML;
+        baTrack.innerHTML = items + items;
     }
-
-    function createDots() {
-        dotsContainer.innerHTML = '';
-        const totalPages = getTotalPages();
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => goToGallerySlide(i));
-            dotsContainer.appendChild(dot);
-        }
-    }
-
-    function updateGallery() {
-        const itemWidth = galleryItems[0].offsetWidth + 15;
-        const offset = galleryIndex * itemsPerView * itemWidth;
-        galleryTrack.style.transform = `translateX(-${offset}px)`;
-
-        const dots = dotsContainer.querySelectorAll('.dot');
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === galleryIndex);
-        });
-    }
-
-    function goToGallerySlide(index) {
-        const totalPages = getTotalPages();
-        galleryIndex = Math.max(0, Math.min(index, totalPages - 1));
-        updateGallery();
-        resetAutoGallery();
-    }
-
-    function nextGallerySlide() {
-        const totalPages = getTotalPages();
-        galleryIndex = (galleryIndex + 1) % totalPages;
-        updateGallery();
-    }
-
-    function prevGallerySlide() {
-        const totalPages = getTotalPages();
-        galleryIndex = (galleryIndex - 1 + totalPages) % totalPages;
-        updateGallery();
-    }
-
-    function startAutoGallery() {
-        autoGalleryInterval = setInterval(nextGallerySlide, 4000);
-    }
-
-    function resetAutoGallery() {
-        clearInterval(autoGalleryInterval);
-        startAutoGallery();
-    }
-
-    prevBtn.addEventListener('click', () => { prevGallerySlide(); resetAutoGallery(); });
-    nextBtn.addEventListener('click', () => { nextGallerySlide(); resetAutoGallery(); });
-
-    updateItemsPerView();
-    createDots();
-    startAutoGallery();
-
-    window.addEventListener('resize', () => {
-        updateItemsPerView();
-        createDots();
-        galleryIndex = 0;
-        updateGallery();
-    });
 
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -262,4 +191,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const cards = testimonialTrack.innerHTML;
         testimonialTrack.innerHTML = cards + cards;
     }
+
+    // Before/After image swap (hover + auto interval)
+    const swapElements = document.querySelectorAll('.ba-swap');
+    const SWAP_INTERVAL = 4000;
+
+    swapElements.forEach(el => {
+        const img = el.querySelector('img');
+        const imgDefault = el.dataset.imgDefault;
+        const imgAlt = el.dataset.imgAlt;
+        let showingAlt = false;
+        let interval = null;
+
+        function swapTo(src) {
+            img.classList.add('fading');
+            setTimeout(() => {
+                img.src = src;
+                img.classList.remove('fading');
+            }, 300);
+        }
+
+        function toggle() {
+            showingAlt = !showingAlt;
+            swapTo(showingAlt ? imgAlt : imgDefault);
+        }
+
+        interval = setInterval(toggle, SWAP_INTERVAL);
+
+        el.addEventListener('mouseenter', () => {
+            clearInterval(interval);
+            if (!showingAlt) {
+                showingAlt = true;
+                swapTo(imgAlt);
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            showingAlt = false;
+            swapTo(imgDefault);
+            interval = setInterval(toggle, SWAP_INTERVAL);
+        });
+    });
 });
