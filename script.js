@@ -396,4 +396,31 @@ document.addEventListener('DOMContentLoaded', () => {
             interval = setInterval(toggle, SWAP_INTERVAL);
         });
     });
+
+    // Dynamic WhatsApp Link Customization for Google Ads and Site Tracking
+    function customizeWhatsAppLinks() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Detect Google Ads traffic via UTM parameters, gclid, or referrer
+        const isGoogleAds = (urlParams.has('utm_source') && urlParams.get('utm_source').toLowerCase() === 'google') || 
+                            urlParams.has('gclid') || 
+                            urlParams.has('utm_campaign') ||
+                            document.referrer.includes('google.com');
+
+        let message = "Olá! Gostaria de fazer um orçamento de gesso através do site.";
+        if (isGoogleAds) {
+            message = "Olá! Vi seu anúncio no Google e gostaria de fazer um orçamento de gesso.";
+        }
+
+        const encodedMessage = encodeURIComponent(message);
+        const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+        
+        waLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            const baseUrl = href.split('?')[0];
+            link.setAttribute('href', `${baseUrl}?text=${encodedMessage}`);
+        });
+    }
+    
+    customizeWhatsAppLinks();
 });
