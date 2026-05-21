@@ -1,4 +1,4 @@
-﻿/* ===== VARIABLES ===== */
+/* ===== VARIABLES ===== */
 :root {
     --primary: #0a1628;
     --primary-light: #1a2d4d;
@@ -565,24 +565,81 @@ img { max-width: 100%; height: auto; display: block; }
     text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
 }
 
+/* ===== CAROUSEL WRAPPERS & BUTTONS ===== */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(10, 22, 40, 0.85);
+    border: 2px solid var(--neon-blue);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.carousel-btn:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    box-shadow: var(--neon-glow);
+}
+
+.carousel-btn.prev-btn {
+    left: -25px;
+}
+
+.carousel-btn.next-btn {
+    right: -25px;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    .carousel-btn.prev-btn {
+        left: -10px;
+    }
+    .carousel-btn.next-btn {
+        right: -10px;
+    }
+}
+
 /* ===== BEFORE & AFTER CAROUSEL ===== */
 .ba-carousel {
-    overflow: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     position: relative;
-    margin-bottom: 50px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.ba-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.ba-carousel:active {
+    cursor: grabbing;
 }
 
 .ba-track {
     display: flex;
     gap: 20px;
-    animation: baScroll 25s linear infinite;
-}
-
-.ba-track:hover { animation-play-state: paused; }
-
-@keyframes baScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 .ba-item {
@@ -606,6 +663,9 @@ img { max-width: 100%; height: auto; display: block; }
     width: 100%;
     height: 250px;
     object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .ba-pain-image-2 {
@@ -662,22 +722,22 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .gallery-carousel {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     position: relative;
-    overflow: hidden;
     border-radius: var(--radius-lg);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.gallery-carousel.auto-scroll .gallery-track {
-    animation: galleryScroll 20s linear infinite;
+.gallery-carousel::-webkit-scrollbar {
+    display: none;
 }
 
-.gallery-carousel.auto-scroll .gallery-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes galleryScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+.gallery-carousel:active {
+    cursor: grabbing;
 }
 
 .gallery-track {
@@ -702,6 +762,9 @@ img { max-width: 100%; height: auto; display: block; }
     height: 220px;
     object-fit: cover;
     transition: transform 0.5s ease;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .gallery-item:hover img { transform: scale(1.1); }

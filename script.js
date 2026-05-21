@@ -134,19 +134,183 @@ document.addEventListener('DOMContentLoaded', () => {
 
     serviceCards.forEach(card => observer.observe(card));
 
-    // Gallery carousel - auto scroll infinite
-    const galleryTrack = document.querySelector('.gallery-track');
-    if (galleryTrack) {
-        const items = galleryTrack.innerHTML;
-        galleryTrack.innerHTML = items + items;
+    // Helper function to initialize interactive carousels with drag, swipe, arrows, and auto-scroll
+    function initInteractiveCarousel(carouselSelector, prevBtnSelector, nextBtnSelector, speedMultiplier = 1) {
+        const carousel = document.querySelector(carouselSelector);
+        if (!carousel) return;
+        const track = carousel.querySelector('div');
+        if (!track) return;
+
+        // Duplicate content for infinite scrolling loop
+        const originalContent = track.innerHTML;
+        track.innerHTML = originalContent + originalContent;
+
+        let isDown = false;
+        let startX;
+        let scrollLeftVal;
+        let isHovered = false;
+        let isInteracting = false;
+        let animationFrameId = null;
+        let resumeTimeout = null;
+
+        const baseSpeed = 1.0; // Increased base speed (originally ~0.5px equivalent per frame)
+        const speed = baseSpeed * speedMultiplier;
+
+        function getOriginalWidth() {
+            return carousel.scrollWidth / 2;
+        }
+
+        // Smooth Auto scroll loop
+        function autoScroll() {
+            if (!isHovered && !isInteracting && !isDown) {
+                const originalWidth = getOriginalWidth();
+                carousel.scrollLeft += speed;
+
+                if (carousel.scrollLeft >= originalWidth) {
+                    carousel.scrollLeft -= originalWidth;
+                }
+            }
+            animationFrameId = requestAnimationFrame(autoScroll);
+        }
+
+        animationFrameId = requestAnimationFrame(autoScroll);
+
+        carousel.addEventListener('mouseenter', () => { isHovered = true; });
+        carousel.addEventListener('mouseleave', () => { isHovered = false; });
+
+        function startInteracting() {
+            isInteracting = true;
+            if (resumeTimeout) clearTimeout(resumeTimeout);
+            resumeTimeout = setTimeout(() => {
+                isInteracting = false;
+            }, 3000);
+        }
+
+        // Drag/Swipe Mouse Events
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isHovered = true;
+            startInteracting();
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeftVal = carousel.scrollLeft;
+            carousel.style.scrollBehavior = 'auto';
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                isHovered = false;
+                carousel.style.scrollBehavior = 'smooth';
+            }
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            if (isDown) {
+                isDown = false;
+                carousel.style.scrollBehavior = 'smooth';
+            }
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            
+            let newScrollLeft = scrollLeftVal - walk;
+            const originalWidth = getOriginalWidth();
+
+            if (newScrollLeft >= originalWidth) {
+                newScrollLeft -= originalWidth;
+                scrollLeftVal -= originalWidth;
+                startX = e.pageX - carousel.offsetLeft;
+            } else if (newScrollLeft <= 0) {
+                newScrollLeft += originalWidth;
+                scrollLeftVal += originalWidth;
+                startX = e.pageX - carousel.offsetLeft;
+            }
+
+            carousel.scrollLeft = newScrollLeft;
+        });
+
+        // Touch swipe events
+        carousel.addEventListener('touchstart', (e) => {
+            isDown = true;
+            isHovered = true;
+            startInteracting();
+            startX = e.touches[0].pageX - carousel.offsetLeft;
+            scrollLeftVal = carousel.scrollLeft;
+            carousel.style.scrollBehavior = 'auto';
+        });
+
+        carousel.addEventListener('touchend', () => {
+            isDown = false;
+            isHovered = false;
+            carousel.style.scrollBehavior = 'smooth';
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            
+            let newScrollLeft = scrollLeftVal - walk;
+            const originalWidth = getOriginalWidth();
+
+            if (newScrollLeft >= originalWidth) {
+                newScrollLeft -= originalWidth;
+                scrollLeftVal -= originalWidth;
+                startX = e.touches[0].pageX - carousel.offsetLeft;
+            } else if (newScrollLeft <= 0) {
+                newScrollLeft += originalWidth;
+                scrollLeftVal += originalWidth;
+                startX = e.touches[0].pageX - carousel.offsetLeft;
+            }
+
+            carousel.scrollLeft = newScrollLeft;
+        });
+
+        // Arrow Buttons
+        const prevBtn = document.querySelector(prevBtnSelector);
+        const nextBtn = document.querySelector(nextBtnSelector);
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                startInteracting();
+                carousel.style.scrollBehavior = 'smooth';
+                const originalWidth = getOriginalWidth();
+                
+                if (carousel.scrollLeft <= 5) {
+                    carousel.style.scrollBehavior = 'auto';
+                    carousel.scrollLeft += originalWidth;
+                    carousel.offsetHeight; // reflow
+                    carousel.style.scrollBehavior = 'smooth';
+                }
+                carousel.scrollLeft -= 320;
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                startInteracting();
+                carousel.style.scrollBehavior = 'smooth';
+                const originalWidth = getOriginalWidth();
+
+                carousel.scrollLeft += 320;
+
+                setTimeout(() => {
+                    if (carousel.scrollLeft >= originalWidth) {
+                        carousel.style.scrollBehavior = 'auto';
+                        carousel.scrollLeft -= originalWidth;
+                    }
+                }, 300);
+            });
+        }
     }
 
-    // Before/After carousel - auto scroll infinite
-    const baTrack = document.querySelector('.ba-track');
-    if (baTrack) {
-        const items = baTrack.innerHTML;
-        baTrack.innerHTML = items + items;
-    }
+    // Initialize carousels with increased speed
+    initInteractiveCarousel('.ba-carousel', '#ba-prev', '#ba-next', 1.8);
+    initInteractiveCarousel('.gallery-carousel', '#gallery-prev', '#gallery-next', 1.8);
 
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
