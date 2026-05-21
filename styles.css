@@ -883,25 +883,31 @@ img { max-width: 100%; height: auto; display: block; }
 .testimonials .section-tag { background: rgba(0, 168, 255, 0.15); }
 
 .testimonials-carousel {
-    overflow: hidden;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     position: relative;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.testimonials-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonials-carousel:active {
+    cursor: grabbing;
 }
 
 .testimonial-track {
     display: flex;
     gap: 30px;
-    animation: testimonialScroll 20s linear infinite;
-}
-
-.testimonial-track:hover { animation-play-state: paused; }
-
-@keyframes testimonialScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 .testimonial-card {
     min-width: 350px;
+    flex-shrink: 0;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);

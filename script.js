@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize carousels with increased speed
     initInteractiveCarousel('.ba-carousel', '#ba-prev', '#ba-next', 1.8);
     initInteractiveCarousel('.gallery-carousel', '#gallery-prev', '#gallery-next', 1.8);
+    initInteractiveCarousel('.testimonials-carousel', '#testimonials-prev', '#testimonials-next', 1.8);
 
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -349,12 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Duplicate testimonials for infinite scroll
-    const testimonialTrack = document.querySelector('.testimonial-track');
-    if (testimonialTrack) {
-        const cards = testimonialTrack.innerHTML;
-        testimonialTrack.innerHTML = cards + cards;
-    }
+
 
     // Before/After image swap (hover + auto interval)
     const swapElements = document.querySelectorAll('.ba-swap');
