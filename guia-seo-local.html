@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo de SEO Local para Clientes | Tutorial</title>
+    <meta name="description" content="Tutorial completo de SEO local: sitemap, Google Search Console, indexação e ranqueamento. Plano aplicável a qualquer cliente.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a1628;
+            --primary-light: #1a2d4d;
+            --secondary: #00a8ff;
+            --secondary-light: #4dc9ff;
+            --neon-blue: #00d4ff;
+            --dark: #060d1a;
+            --dark-light: #0f1e36;
+            --light: #f0f4f8;
+            --gray: #6c757d;
+            --gray-light: #e2e8f0;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.7;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .top-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .top-nav h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .top-nav h1 i {
+            color: var(--secondary);
+            margin-right: 8px;
+        }
+
+        .nav-links-top {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links-top a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition, all 0.3s);
+        }
+
+        .nav-links-top a:hover {
+            color: var(--secondary);
+        }
+
+        /* ===== LAYOUT ===== */
+        .layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 100px auto 60px;
+            padding: 0 30px;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--light);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .sidebar h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            border-left: 2px solid var(--gray-light);
+        }
+
+        .sidebar li {
+            margin-bottom: 2px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            margin-left: -2px;
+            transition: var(--transition, all 0.3s);
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--light);
+            color: var(--secondary);
+            border-left-color: var(--secondary);
+        }
+
+        .sidebar a i {
+            margin-right: 8px;
+            width: 16px;
+        }
+
+        /* ===== CONTENT ===== */
+        .content {
+            max-width: 900px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 60px 50px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0, 168, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+
+        .hero-section .badge {
+            display: inline-block;
+            background: var(--neon-blue);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 30px 0 15px;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #334155;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--secondary-light);
+        }
+
+        a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* ===== CALLOUT BOXES ===== */
+        .callout {
+            padding: 20px 25px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-left: 4px solid;
+            background: var(--light);
+        }
+
+        .callout-info {
+            background: #eff6ff;
+            border-left-color: var(--info);
+        }
+
+        .callout-success {
+            background: #f0fdf4;
+            border-left-color: var(--success);
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border-left-color: var(--warning);
+        }
+
+        .callout-danger {
+            background: #fef2f2;
+            border-left-color: var(--danger);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== CODE BLOCKS ===== */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #e2e8f0;
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* ===== TIMELINE / STEPS ===== */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            margin: 25px 0;
+            padding: 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 15px 15px 15px 60px;
+            background: var(--light);
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--secondary), var(--neon-blue));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CARDS ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            text-align: center;
+            transition: var(--transition, all 0.3s);
+        }
+
+        .card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+
+        .card h4 {
+            margin: 0 0 8px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        th {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px 10px 10px 35px;
+            position: relative;
+            background: var(--light);
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .checklist li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--success);
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition, all 0.3s);
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background: var(--neon-blue);
+            transform: translateY(-3px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                max-height: none;
+            }
+            .nav-links-top {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .layout {
+                padding: 0 15px;
+                margin-top: 80px;
+            }
+            .hero-section {
+                padding: 40px 25px;
+            }
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="container">
+        <h1><i class="fas fa-rocket"></i> Guia SEO Local</h1>
+        <ul class="nav-links-top">
+            <li><a href="#introducao">Início</a></li>
+            <li><a href="#sitemap">Sitemap</a></li>
+            <li><a href="#search-console">Search Console</a></li>
+            <li><a href="#business-profile">GBP</a></li>
+            <li><a href="#analytics">Analytics</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h3>Sumário</h3>
+        <ul>
+            <li><a href="#introducao" class="active"><i class="fas fa-home"></i> Introdução</a></li>
+            <li><a href="#conceitos"><i class="fas fa-lightbulb"></i> Conceitos Básicos</a></li>
+            <li><a href="#sitemap"><i class="fas fa-sitemap"></i> Sitemap.xml</a></li>
+            <li><a href="#search-console"><i class="fas fa-search"></i> Search Console</a></li>
+            <li><a href="#indexacao"><i class="fas fa-check-circle"></i> Indexação</a></li>
+            <li><a href="#business-profile"><i class="fas fa-map-marker-alt"></i> Google Business</a></li>
+            <li><a href="#schema"><i class="fas fa-code"></i> Schema Markup</a></li>
+            <li><a href="#analytics"><i class="fas fa-chart-line"></i> Analytics</a></li>
+            <li><a href="#onpage"><i class="fas fa-file-alt"></i> SEO On-Page</a></li>
+            <li><a href="#offpage"><i class="fas fa-link"></i> SEO Off-Page</a></li>
+            <li><a href="#local"><i class="fas fa-store"></i> SEO Local</a></li>
+            <li><a href="#checklist"><i class="fas fa-tasks"></i> Checklist Final</a></li>
+            <li><a href="#erros"><i class="fas fa-exclamation-triangle"></i> Erros Comuns</a></li>
+            <li><a href="#glossario"><i class="fas fa-book"></i> Glossário</a></li>
+        </ul>
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="hero-section">
+            <span class="badge">Tutorial Definitivo</span>
+            <h2>SEO Local: Guia Completo</h2>
+            <p>Aprenda a fazer seu cliente (ou seu negócio) aparecer nas primeiras posições do Google e Google Maps. Aplicável a qualquer empresa local: gesseiros, dentistas, restaurantes, lojas, clínicas, etc.</p>
+        </div>
+
+        <section id="introducao">
+            <h2>1. Introdução</h2>
+            <p>SEO Local é o conjunto de técnicas para fazer um <strong>negócio local aparecer nas buscas do Google</strong> quando alguém pesquisa por serviços ou produtos na sua cidade ou região.</p>
+            <p>Diferente do SEO tradicional (que visa ranquear globalmente), o SEO Local foca em três pilares:</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h4>Google Maps</h4>
+                    <p>Aparecer no mapa quando alguém busca "perto de mim"</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-list"></i></div>
+                    <h4>Google Search</h4>
+                    <p>Ranquear nas buscas orgânicas com termos locais</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                    <h4>Google Reviews</h4>
+                    <p>Avaliações positivas aumentam credibilidade e ranking</p>
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <strong><i class="fas fa-chart-bar"></i> Por que SEO Local é importante?</strong>
+                <p>46% de todas as buscas no Google têm <strong>intenção local</strong>. 78% das buscas locais em celular resultam em compra offline em até 24 horas. Quem não aparece, perde clientes para a concorrência.</p>
+            </div>
+        </section>
+
+        <section id="conceitos">
+            <h2>2. Conceitos Básicos</h2>
+            <h3>Como o Google funciona (resumo técnico)</h3>
+            <p>O Google tem 3 processos principais:</p>
+            <ol>
+                <li><strong>Crawling (Rastreamento):</strong> o Googlebot visita seu site seguindo links</li>
+                <li><strong>Indexação:</strong> as páginas visitadas são armazenadas no índice do Google</li>
+                <li><strong>Ranking (Ranqueamento):</strong> quando alguém busca, o Google decide a ordem dos resultados</li>
+            </ol>
+
+            <h3>Termos que você precisa conhecer</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Termo</th>
+                        <th>O que significa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SERPs</strong></td>
+                        <td>Search Engine Results Pages (páginas de resultados do Google)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SERP local</strong></td>
+                        <td>Resultados locais (com mapa, fotos, avaliações)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NAP</strong></td>
+                        <td>Name, Address, Phone (Nome, Endereço, Telefone — devem ser iguais em todos os lugares)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Palavra-chave</strong></td>
+                        <td>Termo que as pessoas digitam no Google (ex: "gesseiro goiânia")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Long tail</strong></td>
+                        <td>Palavras-chave mais específicas (ex: "reparo de gesso com infiltração goiânia")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backlink</strong></td>
+                        <td>Link de outro site apontando para o seu</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CTR</strong></td>
+                        <td>Click-Through Rate (% de pessoas que clicam no seu resultado)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Domain Authority</strong></td>
+                        <td>Pontuação (0-100) que indica a autoridade de um site</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="sitemap">
+            <h2>3. Sitemap.xml — O Mapa do Seu Site</h2>
+            <h3>O que é</h3>
+            <p>Um arquivo XML que lista <strong>todas as páginas do seu site</strong> que você quer que o Google conheça. É como entregar a lista de endereços ao Google em vez de esperar ele descobrir sozinho.</p>
+
+            <h3>Por que é importante</h3>
+            <ul>
+                <li>Acelera a <strong>indexação</strong> de páginas novas</li>
+                <li>Garante que páginas profundas (sem muitos links) sejam encontradas</li>
+                <li>É o primeiro passo técnico do SEO</li>
+            </ul>
+
+            <h3>Como criar (estrutura básica)</h3>
+            <p>Crie um arquivo <code>sitemap.xml</code> na raiz do site com esta estrutura:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+    &lt;url&gt;
+        &lt;loc&gt;https://seusite.com.br/&lt;/loc&gt;
+        &lt;lastmod&gt;2026-06-15&lt;/lastmod&gt;
+        &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+        &lt;priority&gt;1.0&lt;/priority&gt;
+    &lt;/url&gt;
+    &lt;url&gt;
+        &lt;loc&gt;https://seusite.com.br/servicos.html&lt;/loc&gt;
+        &lt;lastmod&gt;2026-06-15&lt;/lastmod&gt;
+        &lt;changefreq&gt;monthly&lt;/changefreq&gt;
+        &lt;priority&gt;0.9&lt;/priority&gt;
+    &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+
+            <h4>Campos explicados:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Para que serve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>loc</code></td>
+                        <td>URL completa da página (obrigatório)</td>
+                    </tr>
+                    <tr>
+                        <td><code>lastmod</code></td>
+                        <td>Data da última modificação (YYYY-MM-DD)</td>
+                    </tr>
+                    <tr>
+                        <td><code>changefreq</code></td>
+                        <td>Frequência de mudança: <code>always</code>, <code>daily</code>, <code>weekly</code>, <code>monthly</code>, <code>yearly</code>, <code>never</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>priority</code></td>
+                        <td>Importância relativa (0.0 a 1.0) — não afeta ranking, é só dica</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Como criar automaticamente</h3>
+            <p>Se você usa WordPress, instale o plugin <strong>Yoast SEO</strong> ou <strong>Rank Math</strong> — eles geram o sitemap automaticamente em <code>/sitemap_index.xml</code>.</p>
+            <p>Para sites estáticos (HTML puro), você pode gerar manualmente em <a href="https://www.xml-sitemaps.com/" target="_blank">xml-sitemaps.com</a>.</p>
+
+            <h3>Como informar o Google</h3>
+            <p>Você não precisa "submeter" manualmente — basta adicionar esta linha no arquivo <code>robots.txt</code> na raiz do site:</p>
+
+<pre><code>User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://seusite.com.br/sitemap.xml</code></pre>
+
+            <p>Quando o Google rastrear seu <code>robots.txt</code>, ele vai descobrir o sitemap sozinho.</p>
+
+            <h3>Validar o sitemap</h3>
+            <p>Após criar, valide em: <a href="https://www.xml-sitemaps.com/validate-xml-sitemap.html" target="_blank">xml-sitemaps.com/validate</a></p>
+
+            <div class="callout callout-success">
+                <strong><i class="fas fa-check"></i> Boas práticas</strong>
+                <ul>
+                    <li>Limite de 50.000 URLs por sitemap (se tiver mais, divida em vários)</li>
+                    <li>Não inclua páginas 404, redirecionadas ou com noindex</li>
+                    <li>Mantenha o <code>lastmod</code> atualizado quando alterar páginas importantes</li>
+                    <li>Use <code>https://</code> em todas as URLs</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="search-console">
+            <h2>4. Google Search Console</h2>
+            <h3>O que é</h3>
+            <p>Ferramenta <strong>gratuita do Google</strong> que mostra como o Google vê seu site. É onde você:</p>
+            <ul>
+                <li>Submete o sitemap</li>
+                <li>Verifica se o Google está indexando suas páginas</li>
+                <li>Vê quais palavras-chave geram cliques</li>
+                <li>Identifica erros de rastreamento</li>
+                <li>Recebe avisos de problemas (mobile, segurança, etc.)</li>
+            </ul>
+
+            <h3>Como configurar (passo a passo)</h3>
+            <ol class="steps">
+                <li><strong>Acesse</strong> <a href="https://search.google.com/search-console/" target="_blank">search.google.com/search-console</a></li>
+                <li><strong>Faça login</strong> com a conta Google do cliente (ou crie uma conta nova com e-mail do domínio, ex: <code>contato@seusite.com.br</code>)</li>
+                <li><strong>Adicione a propriedade</strong> clicando em "Adicionar propriedade". Você verá 2 opções:
+                    <ul>
+                        <li><strong>Domínio</strong> (recomendado): valida o domínio inteiro. Exige configurar DNS.</li>
+                        <li><strong>Prefixo do URL</strong>: valida URL específica. Mais fácil (upload de arquivo HTML).</li>
+                    </ul>
+                </li>
+                <li><strong>Valide a propriedade</strong> pelo método escolhido</li>
+                <li><strong>Submeta o sitemap</strong>: menu lateral → Sitemaps → digite <code>sitemap.xml</code> → Enviar</li>
+                <li><strong>Explore os relatórios</strong> no menu lateral</li>
+            </ol>
+
+            <h3>Como verificar propriedade por DNS (Domínio)</h3>
+            <p>O provedor de DNS (Cloudflare, Registro.br, GoDaddy, etc.) vai pedir um registro TXT. Exemplo:</p>
+            <pre><code>Tipo: TXT
+Nome: @
+Valor: google-site-verification=abc123xyz...</code></pre>
+
+            <h3>Como verificar por arquivo HTML (Prefixo)</h3>
+            <p>Baixe o arquivo <code>googlexxxxxxxxxxxxxx.html</code> e faça upload na raiz do site. Em seguida, clique em "Verificar".</p>
+
+            <h3>Submetendo o sitemap</h3>
+            <p>Após validar, vá em <strong>Sitemaps</strong> no menu lateral, digite <code>sitemap.xml</code> no campo "Adicionar um novo sitemap" e clique em <strong>Enviar</strong>.</p>
+            <p>Aparecerá o status. Os mais comuns:</p>
+            <ul>
+                <li>✅ <strong>Sucesso</strong> — sitemap processado, sem erros</li>
+                <li>⚠️ <strong>Possíveis problemas</strong> — algumas URLs com erro</li>
+                <li>❌ <strong>Erro</strong> — formato inválido</li>
+            </ul>
+
+            <h3>Recursos mais úteis do Search Console</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th>O que mostra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Desempenho</strong></td>
+                        <td>Cliques, impressões, CTR e posição por palavra-chave</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cobertura</strong></td>
+                        <td>Quais páginas estão indexadas, excluídas e por quê</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Experiência</strong></td>
+                        <td>Core Web Vitals, mobile usability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Links</strong></td>
+                        <td>Links internos e externos que apontam para o site</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inspeção de URL</strong></td>
+                        <td>Testa uma URL específica (se está indexada, problemas, etc.)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="indexacao">
+            <h2>5. Indexação — Como Saber se o Google Conhece suas Páginas</h2>
+
+            <h3>Forçar indexação de uma URL</h3>
+            <p>Se você criou uma página nova e quer que o Google indexe AGORA (em vez de esperar dias):</p>
+            <ol>
+                <li>Google Search Console → <strong>Inspeção de URL</strong> (topo da página)</li>
+                <li>Cole a URL completa</li>
+                <li>Clique em <strong>"Solicitar indexação"</strong></li>
+                <li>Pronto. Em até 24h a página vai aparecer no Google</li>
+            </ol>
+
+            <h3>Verificar se uma página está indexada</h3>
+            <p>No Google, digite:</p>
+            <pre><code>site:seusite.com.br/url-especifica</code></pre>
+            <p>Se aparecer o resultado, está indexada. Se não aparecer, não está.</p>
+
+            <h3>Quanto tempo leva para indexar?</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Situação</th>
+                        <th>Tempo médio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Com sitemap + inspeção de URL</td>
+                        <td>1-3 dias</td>
+                    </tr>
+                    <tr>
+                        <td>Com sitemap, sem inspeção</td>
+                        <td>3-14 dias</td>
+                    </tr>
+                    <tr>
+                        <td>Sem sitemap, site novo</td>
+                        <td>2-8 semanas</td>
+                    </tr>
+                    <tr>
+                        <td>Site grande, muitas páginas</td>
+                        <td>1-3 meses</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-warning">
+                <strong><i class="fas fa-exclamation-triangle"></i> Atenção</strong>
+                <p>Indexação não garante ranqueamento. Ter a página no Google é só o primeiro passo — ela precisa otimizar conteúdo, autoridade e sinais locais para subir posições.</p>
+            </div>
+        </section>
+
+        <section id="business-profile">
+            <h2>6. Google Business Profile (antigo Google My Business)</h2>
+
+            <h3>O que é</h3>
+            <p>É o <strong>perfil da empresa no Google</strong>. Aparece quando alguém busca pelo nome da empresa ou por serviços locais, mostrando:</p>
+            <ul>
+                <li>📍 Endereço no Google Maps</li>
+                <li>📞 Telefone, horário, site</li>
+                <li>⭐ Avaliações e fotos</li>
+                <li>📸 Posts, produtos, serviços</li>
+            </ul>
+
+            <h3>Por que é o item mais importante para SEO Local</h3>
+            <p>Para negócios locais, o Google Business Profile (GBP) é <strong>mais impactante que o site</strong>. Estima-se que 70% das decisões locais são influenciadas pelo GBP.</p>
+
+            <h3>Como criar (passo a passo)</h3>
+            <ol class="steps">
+                <li>Acesse <a href="https://business.google.com/" target="_blank">business.google.com</a></li>
+                <li>Faça login com a conta Google do cliente</li>
+                <li>Clique em <strong>"Adicionar empresa"</strong></li>
+                <li>Digite o <strong>nome da empresa</strong> (exato como aparece no CNPJ)</li>
+                <li>Escolha a <strong>categoria principal</strong> (ex: "Gesseiro", "Restaurante Italiano")</li>
+                <li>Adicione o <strong>endereço</strong> (ou marque "Atendo clientes no endereço deles" para serviços)</li>
+                <li>Preencha <strong>telefone, site, horário de funcionamento</strong></li>
+                <li>Escolha o <strong>método de verificação</strong> (cartão postal, telefone, e-mail ou vídeo)</li>
+                <li>Aguarde a verificação (cartão postal: 5-14 dias)</li>
+            </ol>
+
+            <h3>Otimizando o perfil ao máximo</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-images"></i></div>
+                    <h4>Fotos</h4>
+                    <p>Logo, capa, fachada, equipe, projetos. Mínimo 10 fotos.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-tags"></i></div>
+                    <h4>Serviços</h4>
+                    <p>Liste todos os serviços com descrição e preço (quando aplicável)</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h4>Posts</h4>
+                    <p>Poste novidades, promoções e dicas semanalmente</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-comments"></i></div>
+                    <h4>Resenhas</h4>
+                    <p>Responda TODAS as avaliações (positivas e negativas)</p>
+                </div>
+            </div>
+
+            <h3>Estratégia de avaliações</h3>
+            <div class="callout callout-success">
+                <strong><i class="fas fa-star"></i> Como conseguir mais avaliações 5 estrelas</strong>
+                <ul style="margin: 0;">
+                    <li>Peça no momento certo (logo após o cliente ficar satisfeito)</li>
+                    <li>Envie link direto pelo WhatsApp</li>
+                    <li>Facilite: envie o texto pronto, peça só para colar</li>
+                    <li>Ofereça um pequeno brinde como agradecimento</li>
+                    <li>Sempre responda, mesmo que seja só "Obrigado!"</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="schema">
+            <h2>7. Schema Markup (Dados Estruturados)</h2>
+
+            <h3>O que é</h3>
+            <p>É um <strong>código que você adiciona ao site</strong> para "explicar" ao Google o que cada informação significa. Sem schema, o Google lê seu texto. Com schema, ele <strong>entende</strong> que:</p>
+            <ul>
+                <li>Aquilo é um telefone, é um endereço, é um preço, é um produto...</li>
+                <li>Permite <strong>rich snippets</strong> (resultados com estrelas, fotos, FAQ direto na busca)</li>
+            </ul>
+
+            <h3>Schema obrigatório para negócios locais: LocalBusiness</h3>
+            <p>Adicione este código no <code>&lt;head&gt;</code> de cada página (formato JSON-LD):</p>
+
+<pre><code>&lt;script type="application/ld+json"&gt;
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Nome da Empresa",
+    "image": "https://seusite.com.br/logo.png",
+    "telephone": "+5562999999999",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua X, 123",
+        "addressLocality": "Cidade",
+        "addressRegion": "UF",
+        "postalCode": "74000-000",
+        "addressCountry": "BR"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -16.6864,
+        "longitude": -49.2643
+    },
+    "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+    }],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+    }
+}
+&lt;/script&gt;</code></pre>
+
+            <h3>Outros schemas úteis</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Schema</th>
+                        <th>Para que serve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>FAQPage</code></td>
+                        <td>Mostra as perguntas e respostas direto no Google (mais visibilidade)</td>
+                    </tr>
+                    <tr>
+                        <td><code>Service</code></td>
+                        <td>Descreve os serviços oferecidos</td>
+                    </tr>
+                    <tr>
+                        <td><code>BlogPosting</code></td>
+                        <td>Marca artigos do blog</td>
+                    </tr>
+                    <tr>
+                        <td><code>BreadcrumbList</code></td>
+                        <td>Mostra navegação estruturada</td>
+                    </tr>
+                    <tr>
+                        <td><code>Product</code></td>
+                        <td>Para lojas: exibe preço e disponibilidade</td>
+                    </tr>
+                    <tr>
+                        <td><code>Event</code></td>
+                        <td>Para eventos, shows, cursos</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Como validar o schema</h3>
+            <p>Use a ferramenta oficial do Google: <a href="https://validator.schema.org/" target="_blank">validator.schema.org</a> ou o <a href="https://search.google.com/test/rich-results" target="_blank">Google Rich Results Test</a></p>
+        </section>
+
+        <section id="analytics">
+            <h2>8. Google Analytics 4 (GA4)</h2>
+
+            <h3>O que é</h3>
+            <p>Ferramenta gratuita que mostra <strong>tudo o que acontece no site</strong>: quem acessa, de onde vem, o que faz, quanto tempo fica.</p>
+
+            <h3>Como instalar</h3>
+            <ol class="steps">
+                <li>Acesse <a href="https://analytics.google.com/" target="_blank">analytics.google.com</a></li>
+                <li>Crie uma conta e propriedade</li>
+                <li>Copie o <strong>código de acompanhamento</strong> (ID no formato <code>G-XXXXXXXXXX</code>)</li>
+                <li>Cole no <code>&lt;head&gt;</code> de todas as páginas, antes do <code>&lt;/head&gt;</code>:</li>
+            </ol>
+
+<pre><code>&lt;!-- Google tag (gtag.js) --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+&lt;/script&gt;</code></pre>
+
+            <h3>Métricas mais importantes</h3>
+            <ul>
+                <li><strong>Usuários ativos:</strong> quantas pessoas acessaram</li>
+                <li><strong>Origens de tráfego:</strong> Google orgânico, redes sociais, direto...</li>
+                <li><strong>Páginas mais vistas:</strong> qual conteúdo engaja</li>
+                <li><strong>Taxa de rejeição:</strong> % de pessoas que saíram sem interagir</li>
+                <li><strong>Conversões:</strong> clicou no WhatsApp, preencheu formulário, etc.</li>
+            </ul>
+        </section>
+
+        <section id="onpage">
+            <h2>9. SEO On-Page (Dentro do Site)</h2>
+
+            <h3>Meta Title</h3>
+            <p>Título que aparece no Google e na aba do navegador. Cada página deve ter um único.</p>
+            <p><strong>Fórmula ideal:</strong> <code>Palavra-chave principal | Marca</code></p>
+            <ul>
+                <li>Tamanho: 50-60 caracteres (senão corta no Google)</li>
+                <li>Coloque a palavra-chave principal no início</li>
+                <li>Seja descritivo e atraente</li>
+            </ul>
+
+            <h3>Meta Description</h3>
+            <p>Texto que aparece abaixo do título no Google. Não é fator de ranking direto, mas <strong>influencia o CTR</strong> (mais cliques = mais visitas).</p>
+            <ul>
+                <li>Tamanho: 140-160 caracteres</li>
+                <li>Inclua a palavra-chave</li>
+                <li>Adicione um call-to-action ("Orçamento grátis!", "Ligue agora!")</li>
+            </ul>
+
+            <h3>Estrutura de Headings (H1, H2, H3)</h3>
+            <ul>
+                <li><strong>H1:</strong> um por página, contém a palavra-chave principal</li>
+                <li><strong>H2:</strong> subtítulos das seções (use variações da palavra-chave)</li>
+                <li><strong>H3, H4:</strong> sub-subtítulos, listas</li>
+            </ul>
+            <p>Nunca pule níveis (ex: H1 direto para H3).</p>
+
+            <h3>URLs amigáveis</h3>
+            <p>URLs curtas, com palavras-chave, separadas por hífen:</p>
+            <ul>
+                <li>✅ <code>seusite.com.br/servicos/reparo-de-gesso-goiania</code></li>
+                <li>❌ <code>seusite.com.br/p123?cat=1&id=456</code></li>
+            </ul>
+
+            <h3>Imagens otimizadas</h3>
+            <ul>
+                <li>Use nomes descritivos: <code>reparo-gesso-goiania.jpg</code> em vez de <code>IMG_1234.jpg</code></li>
+                <li>Comprima para <50KB (use <a href="https://tinypng.com/" target="_blank">TinyPNG</a>)</li>
+                <li>Adicione <strong>alt text</strong> descritivo (acessibilidade + SEO)</li>
+                <li>Use formato WebP quando possível</li>
+            </ul>
+
+            <h3>Linkagem interna</h3>
+            <p>Conecte suas páginas entre si. Quando você menciona "reparo de gesso" em um post, link para a página do serviço.</p>
+        </section>
+
+        <section id="offpage">
+            <h2>10. SEO Off-Page (Fora do Site)</h2>
+
+            <h3>Backlinks (Links Externos)</h3>
+            <p>Quando outros sites linkam para o seu, o Google entende que seu site é <strong>confiável e relevante</strong>. É o fator de ranking mais importante fora do site.</p>
+
+            <h3>Como conseguir backlinks locais</h3>
+            <ul>
+                <li><strong>Crie perfil em diretórios:</strong> Google, Bing, Apple Maps, Yelp, Foursquare, Apontador, TeleListas</li>
+                <li><strong>Câmaras de Comércio e Associações:</strong> CDL, ACIEG,行业协会</li>
+                <li><strong>Jornais e portais locais:</strong> ofereça uma matéria como especialista</li>
+                <li><strong>Parcerias com fornecedores:</strong> lojas de material de construção que indicam você</li>
+                <li><strong>Guest posts:</strong> escreva artigos em blogs da sua área</li>
+                <li><strong>Redes sociais ativas:</strong> Instagram, Facebook, LinkedIn com link para o site</li>
+            </ul>
+
+            <div class="callout callout-danger">
+                <strong><i class="fas fa-ban"></i> Evite:</strong>
+                <ul>
+                    <li>Compra de backlinks (pode causar penalização)</li>
+                    <li>Links de sites spam (cassinos, pornografia, etc.)</li>
+                    <li>Excesso de links em diretórios de baixa qualidade</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="local">
+            <h2>11. SEO Local Avançado</h2>
+
+            <h3>Consistência NAP</h3>
+            <p>O <strong>Nome, Endereço e Telefone</strong> da empresa devem ser <strong>idênticos</strong> em todos os lugares da internet:</p>
+            <ul>
+                <li>Site</li>
+                <li>Google Business Profile</li>
+                <li>Facebook, Instagram, LinkedIn</li>
+                <li>Diretórios (Apontador, Yelp, Foursquare, Bing Places)</li>
+                <li>Placas, cartões de visita</li>
+            </ul>
+            <p>Pequenas variações ("Rua" vs "R.", "Goiânia" vs "Goiania") confundem o Google e prejudicam o ranking.</p>
+
+            <h3>Palavras-chave locais</h3>
+            <p>Sempre inclua o nome da cidade/região nas suas páginas:</p>
+            <ul>
+                <li>Title, H1, meta description</li>
+                <li>Texto do conteúdo (sem exagero)</li>
+                <li>Alt text das imagens</li>
+                <li>URLs</li>
+            </ul>
+            <p>Exemplos: "gesseiro em Goiânia", "forro de gesso Setor Bueno", "reparo de gesso Aparecida de Goiânia".</p>
+
+            <h3>Geo tags e structured data local</h3>
+            <p>Adicione no <code>&lt;head&gt;</code>:</p>
+<pre><code>&lt;meta name="geo.region" content="BR-GO"&gt;
+&lt;meta name="geo.placename" content="Goiânia"&gt;
+&lt;meta name="geo.position" content="-16.6864;-49.2643"&gt;
+&lt;meta name="ICBM" content="-16.6864, -49.2643"&gt;</code></pre>
+
+            <h3>Conteúdo hiperlocal</h3>
+            <p>Crie páginas ou posts sobre bairros e regiões atendidas:</p>
+            <ul>
+                <li>"Reparo de gesso no Setor Bueno"</li>
+                <li>"Forro de gesso em Aparecida de Goiânia"</li>
+                <li>"Gesseiro no Jardim América"</li>
+            </ul>
+            <p>Isso captura buscas específicas por bairro.</p>
+        </section>
+
+        <section id="checklist">
+            <h2>12. Checklist Final — Plano de Ação por Cliente</h2>
+            <p>Use este checklist para cada novo cliente:</p>
+
+            <h3>Fase 1: Configuração Inicial (Semana 1)</h3>
+            <ul class="checklist">
+                <li>Criar/submeter sitemap.xml</li>
+                <li>Configurar Google Search Console</li>
+                <li>Configurar Google Analytics 4</li>
+                <li>Reivindicar/criar Google Business Profile</li>
+                <li>Instalar SSL (HTTPS) se ainda não tem</li>
+            </ul>
+
+            <h3>Fase 2: SEO On-Page (Semanas 2-3)</h3>
+            <ul class="checklist">
+                <li>Otimizar title, meta description e H1 de cada página</li>
+                <li>Criar URLs amigáveis</li>
+                <li>Otimizar imagens (nome, alt, compressão)</li>
+                <li>Adicionar Schema.org LocalBusiness</li>
+                <li>Adicionar linkagem interna entre páginas</li>
+            </ul>
+
+            <h3>Fase 3: Conteúdo (Semanas 3-6)</h3>
+            <ul class="checklist">
+                <li>Criar página FAQ (se não existir)</li>
+                <li>Criar páginas de serviço individuais (1 por serviço)</li>
+                <li>Escrever 3-5 posts iniciais no blog</li>
+                <li>Incluir palavras-chave locais em todos os textos</li>
+            </ul>
+
+            <h3>Fase 4: Local e Reviews (Semanas 4-8)</h3>
+            <ul class="checklist">
+                <li>Padronizar NAP em todos os diretórios</li>
+                <li>Adicionar 10+ fotos ao Google Business Profile</li>
+                <li>Implementar estratégia de avaliações (link direto no pós-venda)</li>
+                <li>Cadastrar em: Bing Places, Apple Maps, Foursquare, Apontador</li>
+            </ul>
+
+            <h3>Fase 5: Off-Page (contínuo)</h3>
+            <ul class="checklist">
+                <li>Buscar backlinks locais (parcerias, guest posts)</li>
+                <li>Postar conteúdo nas redes sociais semanalmente</li>
+                <li>Postar no Google Business Profile semanalmente</li>
+                <li>Monitorar Search Console mensalmente</li>
+            </ul>
+        </section>
+
+        <section id="erros">
+            <h2>13. Erros Comuns que Você Deve Evitar</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Erro</th>
+                        <th>Consequência</th>
+                        <th>Solução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Não ter sitemap</td>
+                        <td>Indexação lenta, páginas esquecidas</td>
+                        <td>Criar e submeter sitemap.xml</td>
+                    </tr>
+                    <tr>
+                        <td>Conteúdo duplicado</td>
+                        <td>Google penaliza</td>
+                        <td>Usar canonical URL</td>
+                    </tr>
+                    <tr>
+                        <td>Sem HTTPS</td>
+                        <td>Chrome marca como "Não seguro"</td>
+                        <td>Instalar certificado SSL (Let's Encrypt é grátis)</td>
+                    </tr>
+                    <tr>
+                        <td>Site lento</td>
+                        <td>Perde ranking e visitantes</td>
+                        <td>Otimizar imagens, usar CDN, comprimir CSS/JS</td>
+                    </tr>
+                    <tr>
+                        <td>Sem mobile-friendly</td>
+                        <td>Mais de 60% das buscas são mobile</td>
+                        <td>Design responsivo (teste no PageSpeed)</td>
+                    </tr>
+                    <tr>
+                        <td>Keyword stuffing (excesso de palavras-chave)</td>
+                        <td>Penalização por spam</td>
+                        <td>Usar naturalmente, com sinônimos</td>
+                    </tr>
+                    <tr>
+                        <td>Ignorar Google Business Profile</td>
+                        <td>Perde 70% das buscas locais</td>
+                        <td>Reivindicar, verificar e otimizar GBP</td>
+                    </tr>
+                    <tr>
+                        <td>Comprar backlinks baratos</td>
+                        <td>Penalização grave</td>
+                        <td>Conquistar organicamente</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="glossario">
+            <h2>14. Glossário Rápido</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Termo</th>
+                        <th>Definição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>CTR</strong></td><td>Click-Through Rate: % de cliques em relação a impressões</td></tr>
+                    <tr><td><strong>DA/PA</strong></td><td>Domain Authority / Page Authority (escala 0-100)</td></tr>
+                    <tr><td><strong>HTTPS</strong></td><td>Protocolo seguro (com certificado SSL)</td></tr>
+                    <tr><td><strong>Canonical</strong></td><td>URL preferida quando há conteúdo similar</td></tr>
+                    <tr><td><strong>Long tail</strong></td><td>Palavras-chave específicas e longas</td></tr>
+                    <tr><td><strong>Mobile-first</strong></td><td>Google prioriza a versão mobile do site</td></tr>
+                    <tr><td><strong>NAP</strong></td><td>Name, Address, Phone (consistência)</td></tr>
+                    <tr><td><strong>Noindex</strong></td><td>Instrução para NÃO indexar uma página</td></tr>
+                    <tr><td><strong>Rich snippet</strong></td><td>Resultado enriquecido (estrelas, FAQ, preço)</td></tr>
+                    <tr><td><strong>Robots.txt</strong></td><td>Arquivo que diz ao Google o que rastrear</td></tr>
+                    <tr><td><strong>Schema.org</strong></td><td>Vocabulário de dados estruturados</td></tr>
+                    <tr><td><strong>SERP</strong></td><td>Search Engine Results Page (página de resultados)</td></tr>
+                    <tr><td><strong>SSL</strong></td><td>Certificado de segurança (cadeado no navegador)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Ferramentas Úteis</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-search"></i></div>
+                    <h4>Google Search Console</h4>
+                    <p>search.google.com/search-console</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Google Analytics</h4>
+                    <p>analytics.google.com</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h4>PageSpeed Insights</h4>
+                    <p>pagespeed.web.dev</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h4>Mobile-Friendly Test</h4>
+                    <p>search.google.com/test/mobile-friendly</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h4>Schema Validator</h4>
+                    <p>validator.schema.org</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-image"></i></div>
+                    <h4>TinyPNG</h4>
+                    <p>tinypng.com (compressão de imagens)</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-key"></i></div>
+                    <h4>Ubersuggest</h4>
+                    <p>neilpatel.com/ubersuggest (palavras-chave)</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-link"></i></div>
+                    <h4>Ahrefs / SEMrush</h4>
+                    <p>Análise de backlinks e concorrência (pagos)</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-success" style="margin: 40px 0;">
+            <strong><i class="fas fa-graduation-cap"></i> Resumo Final</strong>
+            <p>SEO Local é uma maratona, não uma corrida de 100 metros. Os resultados começam a aparecer em <strong>30-90 dias</strong> e melhoram continuamente. O mais importante: <strong>consistência e qualidade</strong>. Faça o básico bem feito (sitemap, GBP, schema, conteúdo local) e mantenha o ritmo.</p>
+        </div>
+    </main>
+</div>
+
+<button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+    // Highlight active link in sidebar
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveLink() {
+        const scrollY = window.scrollY + 150;
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            if (scrollY >= top && scrollY < top + height) {
+                currentSection = section.id;
+            }
+        });
+
+        sidebarLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + currentSection);
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+
+    // Smooth scroll for sidebar links
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Top nav smooth scroll
+    document.querySelectorAll('.nav-links-top a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
