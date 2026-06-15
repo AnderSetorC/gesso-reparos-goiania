@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /upload/nao_usadas/
+
+Sitemap: https://gessoreparosgoiania.com.br/sitemap.xml
