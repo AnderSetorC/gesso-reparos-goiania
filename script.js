@@ -32,24 +32,53 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileOverlay.className = 'mobile-overlay';
         body.appendChild(mobileOverlay);
 
+        // Detecta caminho correto para index.html baseado na localização atual
+        const path = window.location.pathname;
+        let homePrefix = 'index.html';
+        if (path.includes('/servicos/') || path.includes('/blog/')) {
+            homePrefix = '../index.html';
+        }
+
+        let faqLink = 'faq.html';
+        let blogLink = 'blog/index.html';
+        if (homePrefix === '../index.html') {
+            if (path.includes('/blog/')) {
+                faqLink = '../faq.html';
+                blogLink = 'index.html';
+            } else {
+                faqLink = '../faq.html';
+                blogLink = '../blog/index.html';
+            }
+        }
+
         mobileMenu = document.createElement('div');
         mobileMenu.className = 'mobile-menu';
         mobileMenu.innerHTML = `
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#antes-depois">Antes e Depois</a></li>
-                <li><a href="#galeria">Galeria</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
+            <button class="mobile-menu-close" aria-label="Fechar menu">&times;</button>
+            <ul class="mobile-nav">
+                <li><a href="${homePrefix}#home">Início</a></li>
+                <li><a href="${homePrefix}#servicos">Serviços</a></li>
+                <li><a href="${homePrefix}#antes-depois">Antes e Depois</a></li>
+                <li><a href="${homePrefix}#galeria">Galeria</a></li>
+                <li><a href="${homePrefix}#sobre">Sobre</a></li>
+                <li><a href="${faqLink}">FAQ</a></li>
+                <li><a href="${blogLink}">Blog</a></li>
+                <li><a href="${homePrefix}#contato">Contato</a></li>
             </ul>
+            <a href="https://wa.me/556241031439" class="btn btn-primary btn-neon mobile-cta" data-wa-source="mobile-menu" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Orçamento Grátis
+            </a>
         `;
         body.appendChild(mobileMenu);
 
         mobileOverlay.addEventListener('click', closeMobileMenu);
+        mobileMenu.querySelector('.mobile-menu-close').addEventListener('click', closeMobileMenu);
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
+
+        // Notifica o whatsapp-tracking.js para reaplicar tracking
+        document.dispatchEvent(new CustomEvent('mobileMenuCreated'));
     }
 
     function toggleMobileMenu() {
