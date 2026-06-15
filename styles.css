@@ -1226,30 +1226,96 @@ img { max-width: 100%; height: auto; display: block; }
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     pointer-events: auto;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .mobile-menu.active { right: 0; }
 
-.mobile-menu .nav-links {
-    flex-direction: column;
-    gap: 0;
+.mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    padding: 0;
 }
 
-.mobile-menu .nav-links a {
-    display: block;
-    padding: 15px 0;
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    pointer-events: auto;
-    cursor: pointer;
-    color: var(--white);
+.mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--secondary);
+    transform: rotate(90deg);
+}
+
+.mobile-menu .mobile-nav {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+.mobile-menu .mobile-nav li {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.mobile-menu .mobile-nav a {
+    display: block !important;
+    padding: 15px 0 !important;
+    margin: 0 !important;
+    font-size: 1.1rem !important;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: transparent !important;
+    transition: var(--transition) !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    font-weight: 500;
+}
+
+.mobile-menu .mobile-nav a:hover,
+.mobile-menu .mobile-nav a:focus {
+    color: var(--secondary) !important;
+    padding-left: 10px !important;
+    background: transparent !important;
+}
+
+.mobile-menu .mobile-nav a::after {
+    display: none !important;
 }
 
 .mobile-menu .mobile-cta {
-    margin-top: 25px;
-    width: 100%;
-    justify-content: center;
-    pointer-events: auto;
+    display: flex !important;
+    margin-top: 25px !important;
+    width: 100% !important;
+    justify-content: center !important;
+    pointer-events: auto !important;
+    padding: 14px 24px !important;
+    align-items: center !important;
+    gap: 10px !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    color: var(--dark) !important;
+    background: var(--neon-blue) !important;
+    text-decoration: none !important;
+    border: 2px solid transparent !important;
+    box-shadow: var(--neon-glow) !important;
 }
 
 .mobile-overlay {
