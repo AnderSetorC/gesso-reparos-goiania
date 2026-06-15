@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
+
+        // Notifica o whatsapp-tracking.js para reaplicar tracking
+        document.dispatchEvent(new CustomEvent('mobileMenuCreated'));
     }
 
     function toggleMobileMenu() {
