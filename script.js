@@ -32,17 +32,29 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileOverlay.className = 'mobile-overlay';
         body.appendChild(mobileOverlay);
 
+        // Detecta caminho correto para index.html baseado na localização atual
+        const path = window.location.pathname;
+        let homePrefix = 'index.html';
+        if (path.includes('/servicos/') || path.includes('/blog/')) {
+            homePrefix = '../index.html';
+        }
+
         mobileMenu = document.createElement('div');
         mobileMenu.className = 'mobile-menu';
         mobileMenu.innerHTML = `
             <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#antes-depois">Antes e Depois</a></li>
-                <li><a href="#galeria">Galeria</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="${homePrefix}#home">Início</a></li>
+                <li><a href="${homePrefix}#servicos">Serviços</a></li>
+                <li><a href="${homePrefix}#antes-depois">Antes e Depois</a></li>
+                <li><a href="${homePrefix}#galeria">Galeria</a></li>
+                <li><a href="${homePrefix}#sobre">Sobre</a></li>
+                <li><a href="${homePrefix === 'index.html' ? 'faq.html' : (path.includes('/blog/') ? '../faq.html' : 'faq.html')}">FAQ</a></li>
+                <li><a href="${homePrefix === 'index.html' ? 'blog/index.html' : (path.includes('/blog/') ? 'index.html' : '../blog/index.html')}">Blog</a></li>
+                <li><a href="${homePrefix}#contato">Contato</a></li>
             </ul>
+            <a href="https://wa.me/556241031439" class="btn btn-primary btn-neon mobile-cta" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Orçamento Grátis
+            </a>
         `;
         body.appendChild(mobileMenu);
 
